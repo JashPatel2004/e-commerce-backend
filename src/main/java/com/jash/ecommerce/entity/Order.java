@@ -9,9 +9,9 @@ import java.util.List;
 @Entity
 public class Order {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long id;
+    private long id;
 
     @Column(name = "order_id")
     private String orderId;
@@ -22,8 +22,10 @@ public class Order {
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<OrderItem> orderItems=new ArrayList<>();
 
+    @Column(name = "order_date")
     private LocalDateTime orderDate;
 
+    @Column(name = "delivery_date")
     private LocalDateTime deliveryDate;
 
     @OneToOne
@@ -32,16 +34,22 @@ public class Order {
     @Embedded
     private PaymentDetails paymentDetails=new PaymentDetails();
 
+    @Column(name = "total_price")
     private double totalPrice;
 
+    @Column(name = "total_discounted_price")
     private Integer totalDiscountedPrice;
 
+    @Column(name = "discount")
     private Integer discount;
 
+    @Column(name = "order_status")
     private String orderStatus;
 
+    @Column(name = "total_item")
     private int totalItem;
 
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     Order(){

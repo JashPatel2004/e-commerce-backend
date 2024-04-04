@@ -9,8 +9,10 @@ import com.jash.ecommerce.repository.CartRepository;
 import com.jash.ecommerce.request.AddItemRequest;
 import com.jash.ecommerce.service.cartItem.CartItemService;
 import com.jash.ecommerce.service.product.ProductService;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class CartServiceImpl implements CartService{
 
     private CartRepository cartRepository;
