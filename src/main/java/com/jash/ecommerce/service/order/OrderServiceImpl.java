@@ -8,6 +8,7 @@ import com.jash.ecommerce.repository.CartRepository;
 import com.jash.ecommerce.service.cart.CartService;
 import com.jash.ecommerce.service.product.ProductService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class OrderServiceImpl implements OrderService{
         this.cartItemService=cartItemService;
     }
     @Override
+    @Transactional
     public Order createOrder(User user, Address shippingAddress) {
         return null;
     }
@@ -69,6 +71,7 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
+    @Transactional
     public void deleteOrder(Long orderId) throws OrderException {
 
     }
