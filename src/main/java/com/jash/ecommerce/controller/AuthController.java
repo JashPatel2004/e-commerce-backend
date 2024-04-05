@@ -1,12 +1,14 @@
 package com.jash.ecommerce.controller;
 
 import com.jash.ecommerce.config.JwtProvider;
+import com.jash.ecommerce.entity.Cart;
 import com.jash.ecommerce.entity.User;
 import com.jash.ecommerce.exception.UserException;
 import com.jash.ecommerce.repository.UserRepository;
 import com.jash.ecommerce.request.LoginRequest;
 import com.jash.ecommerce.response.AuthResponse;
 import com.jash.ecommerce.service.CustomUserServiceImpl;
+import com.jash.ecommerce.service.cart.CartService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -28,12 +30,14 @@ public class AuthController {
     private JwtProvider jwtProvider;
     private PasswordEncoder passwordEncoder;
     private CustomUserServiceImpl customUserService;
+    private CartService cartService;
 
-    AuthController(UserRepository userRepository,PasswordEncoder passwordEncoder,CustomUserServiceImpl customUserService,JwtProvider jwtProvider){
+    AuthController( CartService cartService,UserRepository userRepository,PasswordEncoder passwordEncoder,CustomUserServiceImpl customUserService,JwtProvider jwtProvider){
         this.userRepository=userRepository;
         this.passwordEncoder=passwordEncoder;
         this.customUserService=customUserService;
         this.jwtProvider=jwtProvider;
+        this.cartService=cartService;
     }
 
     @PostMapping("/signup")
@@ -54,6 +58,7 @@ public class AuthController {
         createdUser.setLastName(lastName);
 
         User savedUser=userRepository.save(createdUser);
+        Cart cart=cartService.createCart(savedUser);
 
         Authentication authentication=new UsernamePasswordAuthenticationToken(savedUser.getEmail(),savedUser.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);

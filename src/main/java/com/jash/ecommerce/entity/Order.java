@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "`order`")
 public class Order {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,7 +53,7 @@ public class Order {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    Order(){
+    public Order(){
 
     }
 

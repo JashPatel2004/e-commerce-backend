@@ -26,7 +26,7 @@ public class OrderItem {
     private Long userId;
     private LocalDateTime deliveryDate;
 
-    OrderItem(){
+    public OrderItem(){
 
     }
 
